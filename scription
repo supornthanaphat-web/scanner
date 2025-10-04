@@ -96,11 +96,11 @@ UICorner_4.Parent = execute
 
 -- Scripts:
 
-local function OKLLT_fake_script() -- Main.Backdoor 
+local function SWRL_fake_script() -- Main.Backdoor 
 	local script = Instance.new('LocalScript', Main)
 
 	local rep = game:GetService("ReplicatedStorage")
-	
+	local  table = {"remoteevent","RemoteEvent", "backdoor", "exploit", "admin", "re", "cmd", "script"}
 	local found = false
 	local name = nil
 	
@@ -117,10 +117,18 @@ local function OKLLT_fake_script() -- Main.Backdoor
 		return false
 	end
 	
+	local function nameissuspection(names)
+		if table.find(table,name) then
+			return names
+		end
+		
+		return names
+	end
+	
 	script.Parent.SCAN.MouseButton1Click:Connect(function()
 		local back = Backdoors()
 		if back[1] then
-			name = back[2]
+			name = nameissuspection(back[2])
 			script.Parent.Status.Text = "Found backdoors called "..back[2]
 			found = true
 			task.wait(2)
@@ -137,8 +145,8 @@ local function OKLLT_fake_script() -- Main.Backdoor
 		end
 	end)
 end
-coroutine.wrap(OKLLT_fake_script)()
-local function SDPMFKO_fake_script() -- Main.LocalScript 
+coroutine.wrap(SWRL_fake_script)()
+local function SFZI_fake_script() -- Main.LocalScript 
 	local script = Instance.new('LocalScript', Main)
 
 	local UIS = game:GetService("UserInputService")
@@ -176,4 +184,4 @@ local function SDPMFKO_fake_script() -- Main.LocalScript
 		end
 	end)
 end
-coroutine.wrap(SDPMFKO_fake_script)()
+coroutine.wrap(SFZI_fake_script)()
