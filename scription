@@ -100,7 +100,7 @@ local function XWNFDV_fake_script() -- Main.Backdoor
 	local script = Instance.new('LocalScript', Main)
 
 	local rep = game:GetService("ReplicatedStorage")
-	local  table = {"remoteevent","RemoteEvent", "backdoor", "exploit", "admin", "re", "cmd", "script"}
+	local  tables = {"remoteevent","RemoteEvent", "backdoor", "exploit", "admin", "re", "cmd", "script"}
 	local found = false
 	local name = nil
 	
@@ -118,9 +118,11 @@ local function XWNFDV_fake_script() -- Main.Backdoor
 	end
 	
 	local function nameissuspection(names)
-		if table.find(table,name) then
-			print("[Backdoor]:Suspect name remote")
-			return names
+		for i = 1, #tables do
+			local n = tables[i]
+			if table.find(tables, n) then
+				return n
+			end
 		end
 	end
 	
