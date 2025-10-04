@@ -1,0 +1,179 @@
+-- Gui to Lua
+-- Version: 3.2
+
+-- Instances:
+
+local ScreenGui = Instance.new("ScreenGui")
+local Main = Instance.new("Frame")
+local UICorner = Instance.new("UICorner")
+local SCAN = Instance.new("TextButton")
+local UICorner_2 = Instance.new("UICorner")
+local TextBox = Instance.new("TextBox")
+local Status = Instance.new("TextLabel")
+local UICorner_3 = Instance.new("UICorner")
+local execute = Instance.new("TextButton")
+local UICorner_4 = Instance.new("UICorner")
+
+--Properties:
+
+ScreenGui.Parent = game.Players.LocalPlayer:WaitForChild("PlayerGui")
+ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+ScreenGui.ResetOnSpawn = false
+
+Main.Name = "Main"
+Main.Parent = ScreenGui
+Main.BackgroundColor3 = Color3.fromRGB(27, 27, 27)
+Main.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Main.BorderSizePixel = 0
+Main.Position = UDim2.new(0.345890403, 0, 0.345833331, 0)
+Main.Size = UDim2.new(0.308219165, 0, 0.308333337, 0)
+
+UICorner.Parent = Main
+
+SCAN.Name = "SCAN"
+SCAN.Parent = Main
+SCAN.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+SCAN.BorderColor3 = Color3.fromRGB(0, 0, 0)
+SCAN.BorderSizePixel = 0
+SCAN.Position = UDim2.new(0.0527777784, 0, 0.0495495498, 0)
+SCAN.Size = UDim2.new(0.438888878, 0, 0.148648649, 0)
+SCAN.Font = Enum.Font.SourceSansBold
+SCAN.Text = "Scan"
+SCAN.TextColor3 = Color3.fromRGB(255, 255, 255)
+SCAN.TextScaled = true
+SCAN.TextSize = 14.000
+SCAN.TextWrapped = true
+
+UICorner_2.Parent = SCAN
+
+TextBox.Parent = Main
+TextBox.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+TextBox.BorderColor3 = Color3.fromRGB(0, 0, 0)
+TextBox.BorderSizePixel = 0
+TextBox.Position = UDim2.new(0.0527777784, 0, 0.243243247, 0)
+TextBox.Size = UDim2.new(0.894444406, 0, 0.590090096, 0)
+TextBox.ClearTextOnFocus = false
+TextBox.Font = Enum.Font.SourceSansBold
+TextBox.MultiLine = true
+TextBox.Text = "print(\"Hello, world!\")"
+TextBox.TextColor3 = Color3.fromRGB(255, 255, 255)
+TextBox.TextSize = 14.000
+TextBox.TextWrapped = true
+TextBox.TextXAlignment = Enum.TextXAlignment.Left
+TextBox.TextYAlignment = Enum.TextYAlignment.Top
+
+Status.Name = "Status"
+Status.Parent = Main
+Status.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+Status.BorderColor3 = Color3.fromRGB(0, 0, 0)
+Status.BorderSizePixel = 0
+Status.Position = UDim2.new(0.522222221, 0, 0.0495495498, 0)
+Status.Size = UDim2.new(0.424999982, 0, 0.148648649, 0)
+Status.Font = Enum.Font.SourceSansBold
+Status.Text = "Unknow"
+Status.TextColor3 = Color3.fromRGB(255, 255, 255)
+Status.TextScaled = true
+Status.TextSize = 14.000
+Status.TextWrapped = true
+
+UICorner_3.Parent = Status
+
+execute.Name = "execute"
+execute.Parent = Main
+execute.BackgroundColor3 = Color3.fromRGB(7, 7, 7)
+execute.BorderColor3 = Color3.fromRGB(0, 0, 0)
+execute.BorderSizePixel = 0
+execute.Position = UDim2.new(0.0527777784, 0, 0.85135138, 0)
+execute.Size = UDim2.new(0.322222233, 0, 0.121621624, 0)
+execute.Font = Enum.Font.SourceSansBold
+execute.Text = "Run"
+execute.TextColor3 = Color3.fromRGB(255, 255, 255)
+execute.TextScaled = true
+execute.TextSize = 14.000
+execute.TextWrapped = true
+
+UICorner_4.Parent = execute
+
+-- Scripts:
+
+local function OKLLT_fake_script() -- Main.Backdoor 
+	local script = Instance.new('LocalScript', Main)
+
+	local rep = game:GetService("ReplicatedStorage")
+	
+	local found = false
+	local name = nil
+	
+	local function Backdoors()
+		for _,v in pairs(rep:GetDescendants()) do
+			if v:IsA("RemoteEvent") then
+				return {
+					true,
+					v.Name
+				}
+			end
+		end
+		
+		return false
+	end
+	
+	script.Parent.SCAN.MouseButton1Click:Connect(function()
+		local back = Backdoors()
+		if back[1] then
+			name = back[2]
+			script.Parent.Status.Text = "Found backdoors called "..back[2]
+			found = true
+			task.wait(2)
+			script.Parent.Status.Text = "None"
+		end
+	end)
+	
+	script.Parent.execute.MouseButton1Click:Connect(function()
+		if found then
+			local remote = rep:WaitForChild(name)
+			remote:FireServer(script.Parent.TextBox.Text)
+		else
+			script.Parent.Status.Text = "need to scan first!"
+		end
+	end)
+end
+coroutine.wrap(OKLLT_fake_script)()
+local function SDPMFKO_fake_script() -- Main.LocalScript 
+	local script = Instance.new('LocalScript', Main)
+
+	local UIS = game:GetService("UserInputService")
+	local frame = script.Parent
+	
+	local dragToggle = nil
+	local dragSpeed = 0.25
+	local dragStart = nil
+	local startPos = nil
+	
+	local function updateInput(input)
+		local delta = input.Position - dragStart
+		local position = UDim2.new(startPos.X.Scale,startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
+		game:GetService("TweenService"):Create(frame, TweenInfo.new(dragSpeed), {Position = position}):Play()
+	end
+	
+	frame.InputBegan:Connect(function(input)
+		if (input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch) then
+			dragToggle = true
+			dragStart = input.Position
+			startPos = frame.Position
+			input.Changed:Connect(function()
+				if input.UserInputState == Enum.UserInputState.End then
+					dragToggle = false
+				end
+			end)
+		end
+	end)
+	
+	UIS.InputChanged:Connect(function(input)
+		if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
+			if dragToggle then
+				updateInput(input)
+			end
+		end
+	end)
+end
+coroutine.wrap(SDPMFKO_fake_script)()
