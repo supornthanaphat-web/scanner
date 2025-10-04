@@ -96,7 +96,7 @@ UICorner_4.Parent = execute
 
 -- Scripts:
 
-local function SWRL_fake_script() -- Main.Backdoor 
+local function XWNFDV_fake_script() -- Main.Backdoor 
 	local script = Instance.new('LocalScript', Main)
 
 	local rep = game:GetService("ReplicatedStorage")
@@ -119,10 +119,9 @@ local function SWRL_fake_script() -- Main.Backdoor
 	
 	local function nameissuspection(names)
 		if table.find(table,name) then
+			print("[Backdoor]:Suspect name remote")
 			return names
 		end
-		
-		return names
 	end
 	
 	script.Parent.SCAN.MouseButton1Click:Connect(function()
@@ -145,8 +144,8 @@ local function SWRL_fake_script() -- Main.Backdoor
 		end
 	end)
 end
-coroutine.wrap(SWRL_fake_script)()
-local function SFZI_fake_script() -- Main.LocalScript 
+coroutine.wrap(XWNFDV_fake_script)()
+local function SBMXU_fake_script() -- Main.LocalScript 
 	local script = Instance.new('LocalScript', Main)
 
 	local UIS = game:GetService("UserInputService")
@@ -184,4 +183,4 @@ local function SFZI_fake_script() -- Main.LocalScript
 		end
 	end)
 end
-coroutine.wrap(SFZI_fake_script)()
+coroutine.wrap(SBMXU_fake_script)()
